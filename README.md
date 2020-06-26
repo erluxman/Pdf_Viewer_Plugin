@@ -4,26 +4,14 @@
 
 A Flutter plugin for IOS and Android providing a simple way to display PDFs.
 
-## Features:
 
-* Display PDF.
+### On iOS enable preview
 
-![android](assets/gifs/pdf_viewer_plugin_android.gif) ........... ![ios](assets/gifs/pdf_viewer_plugin_ios.gif)
+Add this on `ios/Runner/info.plist`:
 
-## Installation
+        <key>io.flutter.embedded_views_preview</key>
+        <true/>
 
-First, add `pdf_viewer_plugin` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
-
-### iOS
-
-Add one row to the `ios/Runner/info.plist`:
-
-```
-...
-
-<key>io.flutter.embedded_views_preview</key>
-<true/>
-```
 
 You need to 
 

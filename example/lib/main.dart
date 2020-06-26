@@ -6,26 +6,46 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf_viewer_plugin/pdf_viewer_plugin.dart';
+import 'package:uuid/uuid.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(PdfApp());
 
-class MyApp extends StatefulWidget {
+class PdfApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text("Pdf test"),
+          ),
+          body: Center(
+            child: PdfView(
+                'https://firebasestorage.googleapis.com/v0/b/takefin-app.appspot.com/o/erluxman%2Freceipts%2FJoshua%20Bloch%20-%20Effective%20Java%20(3rd)%20-%202018.pdf?alt=media&token=14d91ff2-bb24-4faa-91e7-2325fdbcef0a',
+                height: 300,
+                width: 200),
+          ),
+        ));
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class PdfView extends StatefulWidget {
+  const PdfView(this.filePath, {this.width = 150, this.height = 250});
+
+  final String filePath;
+  final double height;
+  final double width;
+
+  @override
+  _PdfViewState createState() => _PdfViewState();
+}
+
+class _PdfViewState extends State<PdfView> {
   String path;
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-
-    return directory.path;
-  }
-
   Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/teste.pdf');
+    final String path = (await getApplicationDocumentsDirectory()).path;
+    return File('$path/${Uuid().toString()}.pdf');
   }
 
   Future<File> writeCounter(Uint8List stream) async {
@@ -41,8 +61,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<Uint8List> fetchPost() async {
-    final response = await http.get(
-        'https://expoforest.com.br/wp-content/uploads/2017/05/exemplo.pdf');
+    final response = await http.get(widget.filePath);
     final responseJson = response.bodyBytes;
 
     return responseJson;
@@ -59,32 +78,25 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    loadPdf();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              if (path != null)
-                Container(
-                  height: 300.0,
-                  child: PdfViewer(
-                    filePath: path,
-                  ),
-                )
-              else
-                Text("Pdf is not Loaded"),
-              RaisedButton(
-                child: Text("Load pdf"),
-                onPressed: loadPdf,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return (path != null)
+        ? Container(
+            height: widget.height,
+            width: widget.width,
+            child: PdfViewer(
+              filePath: path,
+            ),
+          )
+        : Image.asset(
+            "assets/images/pdf.png",
+            height: widget.height,
+            width: widget.width,
+          );
   }
 }

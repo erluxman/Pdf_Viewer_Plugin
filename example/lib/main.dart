@@ -12,11 +12,23 @@ class PdfApp extends StatelessWidget {
           appBar: AppBar(
             title: Text("Pdf test"),
           ),
-          body: Center(
-            child: PDF.network(
+          body: Column(
+            children: <Widget>[
+              PDF.network(
                 'https://raw.githubusercontent.com/FlutterInThai/Dart-for-Flutter-Sheet-cheet/master/Dart-for-Flutter-Cheat-Sheet.pdf',
-                height: 500,
-                width: 300),
+                height: 400,
+                width: 250,
+                placeHolder: Image.asset(
+                  "assets/images/pdf.png",
+                  height: 500,
+                  width: 250,
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Image.asset("assets/images/code.jpeg")
+            ],
           ),
         ));
   }

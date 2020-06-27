@@ -1,6 +1,6 @@
 name: pdf_viewer_plugin_example
 description: Demonstrates how to use the pdf_viewer_plugin plugin.
-
+version: 1.0.0+2
 dependencies:
   flutter:
     sdk: flutter

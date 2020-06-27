@@ -85,18 +85,17 @@ class _PdfViewState extends State<PdfView> {
 
   @override
   Widget build(BuildContext context) {
-    return (path != null)
-        ? Container(
-            height: widget.height,
-            width: widget.width,
-            child: PdfViewer(
-              filePath: path,
-            ),
-          )
-        : Image.asset(
-            "assets/images/pdf.png",
-            height: widget.height,
-            width: widget.width,
-          );
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 500),
+      child: (path != null)
+          ? Container(
+              height: widget.height,
+              width: widget.width,
+              child: PdfViewer(
+                filePath: path,
+              ),
+            )
+          : Image.asset("assets/images/pdf.png"),
+    );
   }
 }

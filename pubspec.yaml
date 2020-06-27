@@ -15,7 +15,6 @@ dev_dependencies:
   path_provider: ^1.6.11
   http:
   uuid: ^2.1.0
-  cached_network_image: ^2.2.0+1
 
 flutter:
   plugin:

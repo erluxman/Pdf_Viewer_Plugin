@@ -1,4 +1,4 @@
-# Network PDF view
+# Network PDF
 
 #### 1. Add `pdf_viewer_plugin`on pubspec.yml with github
 
@@ -20,3 +20,7 @@ Add this on `ios/Runner/info.plist`:
                 height: 500,
                 width: 300,
                 )
+                
+## Demo
+            
+![demo](art/network_pdf.gif)

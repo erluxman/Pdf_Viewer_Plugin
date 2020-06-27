@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
@@ -12,19 +13,23 @@ import 'package:uuid/uuid.dart';
 typedef void PdfViewerCreatedCallback();
 
 class PDF extends StatefulWidget {
-  const PDF._(this.filePath, {this.width = 150, this.height = 250});
+  const PDF._(this.filePath,
+      {this.width = 150, this.height = 250, this.placeHolder});
 
   factory PDF.network(
     String filePath, {
     double width = 150,
     double height = 250,
+    Widget placeHolder,
   }) {
-    return PDF._(filePath, width: width, height: height);
+    return PDF._(filePath,
+        width: width, height: height, placeHolder: placeHolder);
   }
 
   final String filePath;
   final double height;
   final double width;
+  final Widget placeHolder;
 
   @override
   _PDFState createState() => _PDFState();
@@ -76,17 +81,27 @@ class _PDFState extends State<PDF> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: Duration(milliseconds: 500),
-      child: (path != null)
-          ? Container(
-              height: widget.height,
-              width: widget.width,
-              child: PdfViewer(
-                filePath: path,
-              ),
-            )
-          : Image.asset("assets/images/pdf.png"),
-    );
+        duration: Duration(milliseconds: 500),
+        child: (path != null)
+            ? Container(
+                height: widget.height,
+                width: widget.width,
+                child: PdfViewer(
+                  filePath: path,
+                ),
+              )
+            : Container(
+                height: widget.height,
+                width: widget.width,
+                child: widget.placeHolder ??
+                    Center(
+                      child: Container(
+                        height: min(widget.height, widget.width),
+                        width: min(widget.height, widget.width),
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+              ));
   }
 }
 

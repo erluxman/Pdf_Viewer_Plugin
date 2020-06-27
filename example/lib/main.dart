@@ -1,7 +1,5 @@
-
-import 'package:pdf_viewer_plugin/pdf_viewer_plugin.dart';
 import 'package:flutter/material.dart';
-
+import 'package:pdf_viewer_plugin/pdf_viewer_plugin.dart';
 
 void main() => runApp(PdfApp());
 

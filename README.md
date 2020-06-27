@@ -1,10 +1,10 @@
 # Network PDF view
 
-Forked from [lubritto/Pdf_Viewer_Plugin](https://github.com/lubritto/Pdf_Viewer_Plugin)
+#### 1. Add `pdf_viewer_plugin`on pubspec.yml with github
 
-[![pub package](https://img.shields.io/pub/v/pdf_viewer_plugin.svg)](https://pub.dartlang.org/packages/pdf_viewer_plugin)
-
-#### 1. Add `pdf_viewer_plugin: ^version`on pubspec.yml
+      pdf_viewer_plugin:
+        git:
+          url: https://github.com/erluxman/Pdf_Viewer_Plugin.git
 
 #### 2. On iOS enable preview like this:
 

@@ -14,7 +14,7 @@ class PdfApp extends StatelessWidget {
           ),
           body: Center(
             child: PDF.network(
-                'https://firebasestorage.googleapis.com/v0/b/takefin-app.appspot.com/o/erluxman%2Freceipts%2FJoshua%20Bloch%20-%20Effective%20Java%20(3rd)%20-%202018.pdf?alt=media&token=14d91ff2-bb24-4faa-91e7-2325fdbcef0a',
+                'https://raw.githubusercontent.com/FlutterInThai/Dart-for-Flutter-Sheet-cheet/master/Dart-for-Flutter-Cheat-Sheet.pdf',
                 height: 500,
                 width: 300),
           ),
